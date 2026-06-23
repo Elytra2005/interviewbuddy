@@ -37,7 +37,7 @@ export default function CandidateRoom() {
   // Socket
   useEffect(() => {
     if (!sessionToken) return
-    const socket = io('/', { auth: { role: 'candidate', sessionToken }, transports: ['websocket'] })
+    const socket = io(import.meta.env.VITE_API_URL ?? '/', { auth: { role: 'candidate', sessionToken }, transports: ['websocket'] })
     socketRef.current = socket
     return () => socket.disconnect()
   }, [sessionToken])

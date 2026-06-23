@@ -52,7 +52,7 @@ export default function SessionView() {
   useEffect(() => {
     const token = localStorage.getItem('auth_token')
     if (!token) return
-    const socket = io('/', { auth: { role: 'interviewer', token }, transports: ['websocket'] })
+    const socket = io(import.meta.env.VITE_API_URL ?? '/', { auth: { role: 'interviewer', token }, transports: ['websocket'] })
     socketRef.current = socket
 
     socket.on('connect',                () => socket.emit('interviewer:join', { sessionId: id }))
