@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Plus Jakarta Sans — recommended by design system for SaaS/dashboard */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@layer base {
+  html { @apply h-full; }
+  body {
+    @apply h-full antialiased;
+    background-color: #020617;
+    color: #E2E8F0;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  #root { @apply h-full; }
+}
+
+@layer components {
+  /* ── Buttons ── */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold
+           transition-all duration-150 cursor-pointer select-none
+           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#020617]
+           disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn text-black focus:ring-[#00ea64]/50;
+    background-color: #00ea64;
+  }
+  .btn-primary:hover  { background-color: #00c454; }
+  .btn-primary:active { background-color: #009940; }
+  .btn-ghost {
+    @apply btn bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white
+           focus:ring-white/20 border border-white/0 hover:border-white/5;
+  }
+  .btn-outline {
+    @apply btn border border-[rgba(255,255,255,0.10)] text-slate-300
+           hover:border-[rgba(255,255,255,0.18)] hover:bg-white/5 hover:text-white
+           focus:ring-white/20;
+  }
+  .btn-danger {
+    @apply btn bg-red-600 text-white hover:bg-red-500 focus:ring-red-500;
+  }
+
+  /* ── Cards ── */
+  .card {
+    @apply rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[#0B1120] p-6 shadow-card;
+  }
+  .card-sm {
+    @apply rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#0B1120] p-4 shadow-card;
+  }
+
+  /* ── Form inputs ── */
+  .input {
+    @apply w-full rounded-xl border border-[rgba(255,255,255,0.10)] bg-[#111827]
+           px-3.5 py-2.5 text-sm text-white placeholder-slate-600
+           transition-all duration-150
+           focus:border-[#00ea64]/40 focus:outline-none focus:ring-2 focus:ring-[#00ea64]/15
+           hover:border-[rgba(255,255,255,0.15)];
+  }
+  .label {
+    @apply block text-xs font-semibold text-slate-500 mb-1.5 uppercase tracking-wide;
+  }
+
+  /* ── Badges ── */
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[11px] font-semibold;
+  }
+  .badge-low    { @apply badge bg-emerald-500/10 text-emerald-400 ring-1 ring-emerald-500/20; }
+  .badge-medium { @apply badge bg-amber-500/10   text-amber-400   ring-1 ring-amber-500/20; }
+  .badge-high   { @apply badge bg-red-500/10     text-red-400     ring-1 ring-red-500/20; }
+  .badge-info   { @apply badge bg-indigo-500/10  text-indigo-400  ring-1 ring-indigo-500/20; }
+
+  /* ── Stat card ── */
+  .stat-card { @apply card-sm flex flex-col gap-2; }
+  .stat-value { @apply text-3xl font-bold tabular-nums text-white leading-none; }
+  .stat-label { @apply text-xs font-semibold text-slate-500 uppercase tracking-wide; }
+}
+
+/* ── Monaco editor ── */
+.monaco-container { height: 100%; }
+
+/* ── Risk gauge animation ── */
+.risk-arc { transition: stroke-dashoffset 0.9s cubic-bezier(.4,0,.2,1), stroke 0.6s ease; }
+
+/* ── Event feed ── */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.event-item { animation: slideIn 0.18s ease-out; }
+
+/* ── Live pulse ── */
+@keyframes livePulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+.live-dot { animation: livePulse 1.4s ease-in-out infinite; }
+
+/* ── Risk severity colours (no glow) ── */
+.glow-red    { }
+.glow-orange { }
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar       { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.07); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.14); }
+
+::selection { background: rgba(0,234,100,.20); }
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
